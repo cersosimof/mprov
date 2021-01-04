@@ -15,10 +15,24 @@
             </li>
           </ul>
 
+          <button class="btn btn-outline-success" @click="irALogin()">Login</button>
         </div>
       </div>
     </nav>
     <br><br>
+
+
+  <slot></slot>
+
+  <div class="fontColorNavbar container" >
+    <br>
+    <br>
+    <hr>
+    <div style="text-align: center">
+      FOOTER
+    </div>
+  </div>
+
   </div>
 </template>
 
@@ -34,8 +48,16 @@
 
 </style>
 <script>
+import router from '@/router/index.js' // Vue router instance
+
 export default {
   name: 'Navbar',
+  methods: {
+    irALogin() {
+      router.push({ path: '/login' })
+    },
+
+  }
 
 }
 </script>
