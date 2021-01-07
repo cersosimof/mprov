@@ -1,0 +1,3 @@
+2021-01-06 12:11:09,207 WARN  [org.keycloak.events] (default task-38) type=LOGIN_ERROR, realmId=master, clientId=null, userId=null, ipAddress=127.0.0.1, error=expired_code, restart_after_timeout=true, authSessionParentId=028d510d-693b-4412-aa18-89983f69f35c, authSessionTabId=gcLEuVQfY_w
+2021-01-06 13:04:33,136 WARN  [org.keycloak.events] (default task-46) type=LOGOUT_ERROR, realmId=spring-boot, clientId=proveedores, userId=null, ipAddress=127.0.0.1, error=invalid_token, client_auth_method=client-secret
+2021-01-06 13:05:55,129 WARN  [org.keycloak.events] (default task-46) type=LOGOUT_ERROR, realmId=spring-boot, clientId=proveedores, userId=null, ipAddress=127.0.0.1, error=invalid_token, client_auth_method=client-secret

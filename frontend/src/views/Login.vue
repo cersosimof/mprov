@@ -5,18 +5,16 @@
       <br><br><br><br>
 
       <h3 style="color: white; border-bottom: 1px solid white">Credenciales</h3>
-      <form>
         <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label" style="color: white">Email</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          <div id="emailHelp" class="form-text">Correo electronico con el que se dio de alta. {{ this.$store.state.user }}</div>
+          <label for="userLogin" class="form-label" style="color: white">Email / Usuario</label>
+          <input type="email" class="form-control" id="userLogin" v-model="user">
+          <div id="emailHelp" class="form-text">Correo electronico o nombre de usuario.</div>
         </div>
         <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label" style="color: white">Contraseña</label>
-          <input type="password" class="form-control" id="exampleInputPassword1">
+          <label for="loginPass" class="form-label" style="color: white">Contraseña</label>
+          <input type="password" class="form-control" id="loginPass" v-model="pass" v-on:keyup.enter="ingresar">
         </div>
-        <button type="submit" class="btn btn-success" style="width: 100%" >Iniciar</button>
-      </form>
+        <button class="btn btn-success" style="width: 100%" v-on:click="ingresar">Iniciar</button>
     </div>
     </Navbar>
   </div>
@@ -28,9 +26,37 @@ import Navbar from "@/views/components/Navbar";
 
 export default {
   name: "Login",
-
+  computed: {
+    user: {
+      get() {
+        return this.$store.state.user;
+      },
+      set(value) {
+        this.$store.commit("SET_USER", value);
+      },
+    },
+    pass: {
+      get() {
+        return this.$store.state.pass;
+      },
+      set(value) {
+        this.$store.commit("SET_PASS", value);
+      },
+    },
+  },
   components: {
     Navbar
+  },
+  methods: {
+    ingresar: function () {
+      this.$store.commit("SET_BLOQUEADO", true);
+      if(this.user != "" && this.pass != "") {
+        this.$store.dispatch("validarLogin");
+      } else {
+        this.$store.commit('SET_BLOQUEADO',false);
+        alert("Usuario o contraseña invalido.")
+      }
+    },
   },
 
 }

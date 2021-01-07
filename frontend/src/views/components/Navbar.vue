@@ -14,8 +14,8 @@
               <a class="nav-link" href="/ayuda">Ayuda</a>
             </li>
           </ul>
-
-          <button class="btn btn-outline-success" @click="irALogin()">Login</button>
+          <a v-if="this.$session.get('REFRESH_TOKEN') != null" style="color: white" class="nav-link">Hola {{this.$session.get("USERNAME")}}!, <span @click="cerrarSesion()" class="botonSalir">Salir!</span></a>
+          <button class="btn btn-outline-success" v-else @click="irALogin()">Login</button>
         </div>
       </div>
     </nav>
@@ -32,7 +32,7 @@
       FOOTER
     </div>
   </div>
-
+  <Spinner></Spinner>
   </div>
 </template>
 
@@ -45,18 +45,29 @@
 .fontColorNavbar {
   color: white;
 }
+.botonSalir:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
 
 </style>
 <script>
-import router from '@/router/index.js' // Vue router instance
+import router from '@/router/index.js'
+import Spinner from "@/views/components/Spinner";
 
 export default {
   name: 'Navbar',
+  components: {Spinner},
+  component: {
+    Spinner
+  },
   methods: {
     irALogin() {
       router.push({ path: '/login' })
     },
-
+    cerrarSesion() {
+      this.$store.dispatch("cerrarSesion");
+    },
   }
 
 }
