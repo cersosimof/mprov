@@ -79,6 +79,33 @@ public class HomeController {
             logger.error(e);
             return "error";
         }
-
     }
+
+    @CrossOrigin
+    @RequestMapping(path = "/altaNuevoUsuario", method = RequestMethod.POST)
+    public String refreshToken(@RequestParam(value = "nombre") String nombre,
+                               @RequestParam(value = "apellido") String apellido,
+                               @RequestParam(value = "email") String email,
+                               @RequestParam(value = "correo") String correo,
+                               @RequestParam(value = "pass") String pass ) {
+
+        BeanKeyCloakAdminToken tokenAdmin = new BeanKeyCloakAdminToken();
+
+        logger.info(Constantes.LINEA_PUNTEADA);
+        logger.info("Ingreso a controlador de cierre de sesion");
+        logger.info(Constantes.LINEA_PUNTEADA);
+
+        try{
+
+            tokenAdmin = homeService.getAdminTokenKC();
+            String respuesta = homeService.refreshToken(tokenAdmin.getAccess_token(), refreshToken);
+            return respuesta;
+
+        } catch (Exception e) {
+            logger.error(e);
+            return "error";
+        }
+    }
+
+
 }

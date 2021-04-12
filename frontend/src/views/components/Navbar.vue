@@ -10,9 +10,6 @@
             <li class="nav-item iconNav">
               <a class="nav-link active" aria-current="page" href="/">Home</a>
             </li>
-            <li class="nav-item iconNav">
-              <a class="nav-link" href="/ayuda">Ayuda</a>
-            </li>
           </ul>
           <a v-if="this.$session.get('REFRESH_TOKEN') != null" style="color: white" class="nav-link">Hola {{this.$session.get("USERNAME")}}!, <span @click="cerrarSesion()" class="botonSalir">Salir!</span></a>
           <button class="btn btn-outline-success" v-else @click="irALogin()">Login</button>

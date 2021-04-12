@@ -6,6 +6,7 @@ import Registrar from "../views/Registrar.vue";
 import Listado from "../views/Listado.vue";
 import Ayuda from "../views/Ayuda.vue";
 import Dashboard from "../views/Dashboard.vue";
+import Registrarme from "../views/Registrarme.vue";
 import Login from "../views/Login.vue";
 import store from "@/store";
 
@@ -67,14 +68,14 @@ const routes = [
         component: Main,
     },
     {
-        path: "/ayuda",
-        name: "Ayuda",
-        component: Ayuda,
-    },
-    {
         path: "/login",
         name: "login",
         component: Login,
+    },
+    {
+        path: "/registrarme",
+        name: "registrarme",
+        component: Registrarme,
     },
     {
         path: "/registrar",

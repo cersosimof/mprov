@@ -1,7 +1,10 @@
 <template>
   <div>
     <Navbar>
-      <div class="container">
+      <div class="container" style="height: 70vh">
+
+        <h2 style="color: white; border-bottom: 1px solid white; padding-bottom: 10px; margin-bottom: 40px;">OPCIONES</h2>
+
         <div style="display: flex;flex-flow: row wrap;flex-direction: row;justify-content: space-between; height: 70vh">
 
           <div class="boxMenu" @click="irARegistrar()">

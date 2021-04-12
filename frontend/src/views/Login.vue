@@ -15,14 +15,25 @@
           <input type="password" class="form-control" id="loginPass" v-model="pass" v-on:keyup.enter="ingresar">
         </div>
         <button class="btn btn-success" style="width: 100%" v-on:click="ingresar">Iniciar</button>
+      <br>
+      <p style="color: white">Sin cuenta?, <span class="registrarseBoton" @click="registrarme()">registrarse.</span></p>
     </div>
     </Navbar>
   </div>
 
 </template>
+<style>
+.registrarseBoton {
+  cursor: pointer;
+}
 
+.registrarseBoton:hover {
+  text-decoration: underline;
+}
+</style>
 <script>
 import Navbar from "@/views/components/Navbar";
+import router from "@/router"
 
 export default {
   name: "Login",
@@ -57,6 +68,9 @@ export default {
         alert("Usuario o contraseña invalido.")
       }
     },
+    registrarme () {
+      router.push("/registrarme")
+    }
   },
 
 }

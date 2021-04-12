@@ -11,7 +11,12 @@ export default new Vuex.Store({
         pass: '',
         token: '',
         refresh_token: '',
-        bloqueado: false,
+        nombreNewUser: '',
+        apellidoNewUser: '',
+        emailNewUser: '',
+        userNameNewUser: '',
+        passNewUser: '',
+        pass2NewUser: ''
     },
     mutations: {
         SET_USER(state, userInput) {
@@ -26,8 +31,23 @@ export default new Vuex.Store({
         SET_TOKEN_REFRESH(state, tokenRefreshKC) {
             state.refresh_token = tokenRefreshKC;
         },
-        SET_BLOQUEADO(state, dato) {
-            state.bloqueado = dato;
+        SET_NEW_NOMBRE(state, dato) {
+            state.nombreNewUser = dato;
+        },
+        SET_NEW_APELLIDO(state, dato) {
+            state.apellidoNewUser = dato;
+        },
+        SET_NEW_EMAIL(state, dato) {
+            state.emailNewUser = dato;
+        },
+        SET_NEW_USER_NAME(state, dato) {
+            state.userNameNewUser = dato;
+        },
+        SET_NEW_PASS(state, dato) {
+            state.passNewUser = dato;
+        },
+        SET_NEW_PASS_2(state, dato) {
+            state.pass2NewUser = dato;
         },
     },
     actions: {
@@ -68,7 +88,7 @@ export default new Vuex.Store({
                 });
         },
         cerrarSesion ( { dispatch, commit }) {
-
+            commit("SET_BLOQUEADO", true);
             console.log(dispatch)
             console.log(commit)
 
