@@ -32,10 +32,10 @@
         <div class="mb-3">
           <label for="pass2NewUser" class="form-label" style="color: white">Repetir Contraseña</label>
           <input type="password" class="form-control" id="pass2NewUser" v-model="pass2NewUser"
-                 v-on:keyup.enter="ingresar">
+                 v-on:keyup.enter="registrarme">
         </div>
 
-        <button class="btn btn-success" style="width: 100%" v-on:click="ingresar">Ingresar</button>
+        <button class="btn btn-success" style="width: 100%" v-on:click="registrarme">Ingresar</button>
         <br>
       </div>
     </Navbar>
@@ -103,14 +103,8 @@ export default {
     Navbar
   },
   methods: {
-    ingresar: function () {
-      this.$store.commit("SET_BLOQUEADO", true);
-      if (this.user != "" && this.pass != "") {
-        this.$store.dispatch("validarLogin");
-      } else {
-        this.$store.commit('SET_BLOQUEADO', false);
-        alert("Usuario o contraseña invalido.")
-      }
+    registrarme: function () {
+        this.$store.dispatch("ingresarUsuario");
     },
   },
 

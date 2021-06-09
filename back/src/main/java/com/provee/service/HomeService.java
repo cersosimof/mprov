@@ -94,7 +94,7 @@ public class HomeService {
             logger.info(Constantes.LINEA_PUNTEADA);
 
             Unirest.setTimeouts(0, 0);
-            HttpResponse<String> response = Unirest.get("http://127.0.0.1:8080/auth/admin/realms/springboot/users?email=" + mail)
+            HttpResponse<String> response = Unirest.get("http://192.168.0.163:8080/auth/admin/realms/prueba/users?email=" + mail)
                     .header("Authorization", "Bearer " + token + "")
                     .asString();
 
@@ -173,7 +173,7 @@ public class HomeService {
         }
     }
 
-    public String refreshToken(String nombre, String apellido, String username, String email, String pass) {
+    public String altaNuevoUsuario(String nombre, String apellido, String email, String usuario, String pass, BeanKeyCloakAdminToken adminToken) {
         try {
 
             logger.info(Constantes.LINEA_PUNTEADA);
@@ -181,10 +181,10 @@ public class HomeService {
             logger.info(Constantes.LINEA_PUNTEADA);
 
             Unirest.setTimeouts(0, 0);
-            HttpResponse<String> response = Unirest.post("http://127.0.0.1:8080/auth/admin/realms/springboot/users")
+            HttpResponse<String> response = Unirest.post("http://192.168.0.163:8080/auth/admin/realms/prueba/users")
                     .header("Content-Type", "application/json")
-                    .header("Authorization", "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJWMjJBZzV6TXVKSFdoSDlCSDJyUUxacUFlMERsU3ZmMkdGSEpaOHNZYWpFIn0.eyJleHAiOjE2MDk5MzU4MDYsImlhdCI6MTYwOTkzNTc0NiwianRpIjoiZWM1N2FlMDgtMzNiMi00ODg5LTljNWEtMzFlNmZkOGIzNGJhIiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMTo4MDgwL2F1dGgvcmVhbG1zL21hc3RlciIsInN1YiI6IjA1OGFlNTdlLWRiOTMtNDA5YS04OWY1LThjMzhkMDE4OTY2YiIsInR5cCI6IkJlYXJlciIsImF6cCI6ImFkbWluLWNsaSIsInNlc3Npb25fc3RhdGUiOiI5NWYzOTNlZS03YTVlLTQ3MDUtODYxNC1jNzY4Yzg5NjMxMWQiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHA6Ly8xMjcuMC4wLjE6ODA4MiJdLCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6ImNoZXJzbyJ9.NK9-zMA14IvA8WeGltbzadSAH46Mz4DnA5JgDZXUo3k9goVy4yI20o0sesW3SHWuzjCXlJJsxkoo5Y4vaA1p96MpeDIWKmUtEr9naq0Cym7NkpQtF65cUcY9abwl8ff-DIueeiB_rVOa28KnFE-FSIKRD8bUAWDtJ5vS7sbN0-q-OYiS07xA60bIvVm8TtcBYc2k26AHHMkYYIcPp8ljngsZT761dN_NVHKWw0U1psrHz03SRnyy2taPLVmBCOYwvezuJe3150jHG8K4xDucS8gMTLFMnXKF5j0bD8W811r7i65s_YylFC2HJyY3ZIpWHYKgahMSoy39ueOyqlXB9w")
-                    .body("{\n    \"firstName\": \"" + nombre + "\",\n    \"lastName\": \"" + apellido + "\",\n    \"username\": \"" + username + "\",\n    \"email\": \"" + email + "\",\n    \"enabled\": \"true\",\n    \"credentials\": [\n        {\n            \"type\": \"password\",\n            \"value\": \"" + pass + "\",\n            \"temporary\": false\n        }\n    ]\n}")
+                    .header("Authorization", "Bearer " + adminToken.getAccess_token() + "")
+                    .body("{\n    \"firstName\": \"" + nombre + "\",\n    \"lastName\": \"" + apellido + "\",\n    \"username\": \"" + usuario + "\",\n    \"email\": \"" + email + "\",\n    \"enabled\": \"true\",\n    \"credentials\": [\n        {\n            \"type\": \"password\",\n            \"value\": \"" + pass + "\",\n            \"temporary\": false\n        }\n    ]\n}")
                     .asString();
 
             return response.getBody().toString();

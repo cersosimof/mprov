@@ -51,7 +51,7 @@ export default new Vuex.Store({
         },
     },
     actions: {
-        validarLogin({ dispatch, commit }) {
+        validarLogin({dispatch, commit}) {
             console.log("ingreso a validarLogin" + dispatch);
 
             const axios = require('axios');
@@ -77,7 +77,7 @@ export default new Vuex.Store({
                         Vue.prototype.$session.set('TOKEN', response.data.access_token);
                         Vue.prototype.$session.set('REFRESH_TOKEN', response.data.refresh_token);
                         Vue.prototype.$session.set('USERNAME', response.data.infoUser.username);
-                        router.push({ path: "/main" })
+                        router.push({path: "/main"})
                     } else {
                         alert(response.data.error)
                     }
@@ -87,7 +87,7 @@ export default new Vuex.Store({
                     console.log(error);
                 });
         },
-        cerrarSesion ( { dispatch, commit }) {
+        cerrarSesion({dispatch, commit}) {
             commit("SET_BLOQUEADO", true);
             console.log(dispatch)
             console.log(commit)
@@ -120,6 +120,45 @@ export default new Vuex.Store({
                     console.log(error);
                 });
         },
+        ingresarUsuario(){
+            console.log("alta de nuevo usuario")
+
+            const axios = require('axios');
+            let qs = require('qs');
+            let data = qs.stringify({
+                'nombre': this.state.nombreNewUser,
+                'apellido': this.state.apellidoNewUser,
+                'email': this.state.emailNewUser,
+                'usuario': this.state.userNameNewUser,
+                'pass': this.state.passNewUser,
+            });
+
+            let config = {
+                method: 'post',
+                url: 'http://127.0.0.1:8081/altaNuevoUsuario',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                data: data
+            };
+
+            axios(config)
+                .then(function (response) {
+                    if (response.data.error == null) {
+                        console.log(response.data)
+                        Vue.prototype.$session.set('TOKEN', response.data.access_token);
+                        Vue.prototype.$session.set('REFRESH_TOKEN', response.data.refresh_token);
+                        Vue.prototype.$session.set('USERNAME', response.data.infoUser.username);
+                        router.push({path: "/main"})
+                    } else {
+                        alert(response.data.error)
+                    }
+                    //commit("SET_BLOQUEADO", false);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
 
     }
 })

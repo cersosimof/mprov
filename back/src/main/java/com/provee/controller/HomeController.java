@@ -22,8 +22,10 @@ public class HomeController {
     public BeanKeyCloakAdminToken getUserMessage(@RequestParam(value = "user") String user, @RequestParam(value = "pass") String pass) {
 
 
-        BeanKeyCloakAdminToken tokenAdmin = new BeanKeyCloakAdminToken();
-        BeanKeyCloakAdminToken tokenUser = new BeanKeyCloakAdminToken();
+        BeanKeyCloakAdminToken tokenAdmin;
+        tokenAdmin = new BeanKeyCloakAdminToken();
+        BeanKeyCloakAdminToken tokenUser;
+        tokenUser = new BeanKeyCloakAdminToken();
 
         logger.info(Constantes.LINEA_PUNTEADA);
         logger.info("Ingreso Controller Home");
@@ -86,7 +88,7 @@ public class HomeController {
     public String refreshToken(@RequestParam(value = "nombre") String nombre,
                                @RequestParam(value = "apellido") String apellido,
                                @RequestParam(value = "email") String email,
-                               @RequestParam(value = "correo") String correo,
+                               @RequestParam(value = "usuario") String usuario,
                                @RequestParam(value = "pass") String pass ) {
 
         BeanKeyCloakAdminToken tokenAdmin = new BeanKeyCloakAdminToken();
@@ -96,11 +98,9 @@ public class HomeController {
         logger.info(Constantes.LINEA_PUNTEADA);
 
         try{
-
             tokenAdmin = homeService.getAdminTokenKC();
-            String respuesta = homeService.refreshToken(tokenAdmin.getAccess_token(), refreshToken);
+            String respuesta = homeService.altaNuevoUsuario(nombre, apellido, email, usuario, pass, tokenAdmin);
             return respuesta;
-
         } catch (Exception e) {
             logger.error(e);
             return "error";
